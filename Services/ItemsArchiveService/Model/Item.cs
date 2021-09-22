@@ -31,5 +31,8 @@ namespace ItemsArchiveService.Model
         [BsonElement("isapproved")]
         public bool IsApproved { get; set; }
 
+        [BsonElement("c_date")]
+        public bool CreatedDate { get; set; }
+
     }
 }
