@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -11,7 +12,7 @@ namespace ItemsArchiveService.Model
         public string UserId {get;set;}
         
         [BsonElement("code")]
-        public long Code { get; set; }
+        public string Code { get; set; }
 
         [BsonElement("brand")]
         public string Brand { get; set; }
@@ -32,7 +33,7 @@ namespace ItemsArchiveService.Model
         public bool IsApproved { get; set; }
 
         [BsonElement("c_date")]
-        public bool CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
     }
 }

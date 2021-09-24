@@ -6,10 +6,10 @@ namespace ItemsArchiveService.CustomValidations
 {
     public class IsValidMobileNo : ValidationAttribute
     {
-        public bool IsValid(string mobileNo)
+        public override bool IsValid(object value)
         {
             var regex = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
-            return Regex.IsMatch(mobileNo, regex);
+            return Regex.IsMatch(value.ToString(), regex);
         }
     }
 }

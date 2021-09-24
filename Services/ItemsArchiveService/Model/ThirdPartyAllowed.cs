@@ -23,8 +23,8 @@ namespace ItemsArchiveService.Model
         [BsonElement("e_date")]
         public DateTime ExpiresDate { get;set;}
 
-        [BsonElement("m_allowed")]
-        public long MaxAllowedRequest{ get;set;}
+        [BsonElement("a_request")]
+        public long AllowedRequest{ get;set;}
 
         [BsonElement("r_count")]
         public long RequestCount{ get;set;}

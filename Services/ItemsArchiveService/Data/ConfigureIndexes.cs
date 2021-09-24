@@ -2,11 +2,12 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ItemsArchiveService.Model;
+using Microsoft.Extensions.Hosting;
 using MongoDB.Driver;
 
 namespace ItemsArchiveService.Data
 {
-    public class ConfigureIndexes
+    public class ConfigureIndexes : IHostedService
     {
         private readonly IDbContext _context;
          public ConfigureIndexes(IDbContext context)

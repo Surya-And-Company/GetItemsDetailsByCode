@@ -1,16 +1,21 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using ItemsArchiveService.Model;
+using ItemsArchiveService.Utility;
 
 namespace ItemsArchiveService.CustomValidations
 {
     public class IsValidRole : ValidationAttribute
     {
-        public bool IsValid(string role)
+        public override bool IsValid(object value)
         {
-            if (role ==  Roles.Admin || role == Roles.User)
-                return true;
-            else
-              return false;                                
+            if (Enum.TryParse(value.ToString(), out Role role))
+            {
+                if (role == Role.Admin || role == Role.User)
+                    return true;
+            }
+            return false;
+
         }
     }
 }

@@ -18,11 +18,7 @@ namespace ItemsArchiveService.Model
         public string ExceptionType { get; set; }
 
         [BsonElement("url")]
-        public string ExceptionURL { get; set; }
-
-        [BsonElement("service")]
-        public string Service { get; set; }
-
+        public string ExceptionURL { get; set; }       
 
         [BsonElement("stacktrace")]
         public string StackTrace { get; set; }

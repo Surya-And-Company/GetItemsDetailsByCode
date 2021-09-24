@@ -7,7 +7,7 @@ namespace ItemsArchiveService.DTO
     public class ItemDTO
     {
         [Required]
-        public long Code { get; set; }
+        public string Code { get; set; }
         
         public string Brand { get; set; }
 
@@ -21,6 +21,6 @@ namespace ItemsArchiveService.DTO
         public string Description { get; set; }
 
         [Required]
-        public List<IFormFile> Image { get; set; }
+        public List<IFormFile> Images { get; set; }
     }
 }

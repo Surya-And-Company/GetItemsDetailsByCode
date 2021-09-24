@@ -9,7 +9,7 @@ namespace ItemsArchiveService.Mapper
     {
         public ItemArchiveProfile()
         { 
-            CreateMap<UserDTO, User>()
+            CreateMap<CreateUserDTO, User>()
             .ForMember(dest => dest.CreatedDate,  opt => opt.MapFrom(src => DateTime.UtcNow))
             .ForMember(dest => dest.LastUpdatedDate,  opt => opt.MapFrom(src => DateTime.UtcNow))
             .ForMember(dest => dest.IsDeleted,  opt => opt.MapFrom(src => false))
@@ -17,7 +17,11 @@ namespace ItemsArchiveService.Mapper
 
             CreateMap<ItemDTO, Item>()
             .ForMember(dest => dest.IsApproved,  opt => opt.MapFrom(src => false))
-            .ForMember(dest => dest.CreatedDate,  opt => opt.MapFrom(src => DateTime.UtcNow));        
+            .ForMember(dest => dest.CreatedDate,  opt => opt.MapFrom(src => DateTime.UtcNow));       
+
+            CreateMap<ThirdPartyDTO, ThirdPartyAllowed>()
+            .ForMember(dest => dest.RegistrationDate,  opt => opt.MapFrom(src => DateTime.UtcNow));        
+
         }
     }
 }
