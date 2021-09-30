@@ -6,7 +6,7 @@ namespace ItemsArchiveService.Repository
 {
     public interface IThirdPartyRepository
     {
-        Task Add(ThirdPartyDTO thirdparty);
-        Task Get(string token);
+        Task AddAsync(ThirdPartyDTO thirdparty);
+        Task<bool> IsValidAsync(string token);
     }
 }

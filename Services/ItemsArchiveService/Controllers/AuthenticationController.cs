@@ -45,9 +45,9 @@ namespace ItemsArchiveService.Controllers
                 return BadRequest(new { Message = "Username or password not matching!" });
             }
 
-            var token = _jwtUtils.GenerateJwtToken(user);
+            (string token, DateTime expireDate) = _jwtUtils.GenerateJwtToken(user);
 
-            return Ok(new LoginResponseDTO() { Name = user.Name, Token = token, ProfileImage = user.ProfileImage });
+            return Ok(new LoginResponseDTO() { Name = user.Name, Token = token, ExpireDate = expireDate,  ProfileImage = user.ProfileImage });
 
         }
     }

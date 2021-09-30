@@ -21,7 +21,7 @@ namespace ItemsArchiveService.Authorization
             _appSettings = appSettings.Value;
         }
         
-        public string GenerateJwtToken(User user)
+        public (string, DateTime) GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -30,9 +30,9 @@ namespace ItemsArchiveService.Authorization
                 Subject = new ClaimsIdentity(new[] { new Claim("userid", user.Id.ToString()) }),
                 Expires = DateTime.UtcNow.AddDays(5),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
+            };           
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            return (tokenHandler.WriteToken(token), tokenDescriptor.Expires.Value);
         }
 
         public string ValidateJwtToken(string token)

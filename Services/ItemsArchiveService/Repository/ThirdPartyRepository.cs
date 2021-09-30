@@ -4,6 +4,7 @@ using AutoMapper;
 using ItemsArchiveService.Data;
 using ItemsArchiveService.DTO;
 using ItemsArchiveService.Model;
+using MongoDB.Driver;
 
 namespace ItemsArchiveService.Repository
 {
@@ -16,15 +17,21 @@ namespace ItemsArchiveService.Repository
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-        public async Task Add(ThirdPartyDTO thirdparty)
+       
+        public async Task AddAsync(ThirdPartyDTO thirdparty)
         {
             var data = _mapper.Map<ThirdPartyAllowed>(thirdparty);
             await _context.ThirdPartiesAllowed.InsertOneAsync(data);
         }
 
-        public Task Get(string token)
+        public async Task<bool> IsValidAsync(string token)
         {
-            throw new System.NotImplementedException();
+            var result = await _context.ThirdPartiesAllowed.Find(x => x.Token == token).FirstOrDefaultAsync();
+            if (result != null)
+                return true;
+
+            return false;
         }
+
     }
 }

@@ -102,5 +102,8 @@
       }
     }
   },
-  "defaultProject": "ManageItems"
+  "defaultProject": "ManageItems",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

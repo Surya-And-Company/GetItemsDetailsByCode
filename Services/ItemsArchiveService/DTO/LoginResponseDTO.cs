@@ -8,6 +8,8 @@ namespace ItemsArchiveService.DTO
 
         public string Token { get; set; }
 
+        public DateTime ExpireDate { get; set; }
+
         public string ProfileImage { get; set; }
     }
 }
