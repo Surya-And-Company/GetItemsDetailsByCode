@@ -1,6 +1,9 @@
+import { Role } from "./role";
+
 export interface AuthResponse {
   token: string;
   name: string;
   profileImagePath: string;
-  expiratioDate: Date;
+  expireDate: Date;
+  role: Role;
 }

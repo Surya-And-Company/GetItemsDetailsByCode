@@ -1,4 +1,5 @@
 using System;
+using ItemsArchiveService.Utility;
 
 namespace ItemsArchiveService.DTO
 {
@@ -11,5 +12,7 @@ namespace ItemsArchiveService.DTO
         public DateTime ExpireDate { get; set; }
 
         public string ProfileImage { get; set; }
+
+        public Role Role { get; set; }
     }
 }

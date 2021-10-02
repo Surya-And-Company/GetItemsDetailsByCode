@@ -55,7 +55,7 @@ export class AuthEffects {
         tap((action) => {
           this.store.dispatch(setErrorMessage({ message: '' }));
           if (action.redirect) {
-            this.router.navigate(['/']);
+            this.router.navigate(['item']);
           }
         })
       );
@@ -79,7 +79,7 @@ export class AuthEffects {
         ofType(autoLogout),
         map((action) => {
           this.authService.logout();
-          this.router.navigate(['auth']);
+          this.router.navigate(['login']);
         })
       );
     },

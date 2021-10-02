@@ -1,1 +1,43 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isAuthenticated | async">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold">MANAGE ITEMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav  fw-bold">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#" [routerLink]="['/item/add']">Add Item</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" [routerLink]="['/item/manage']">View Item</a>
+                </li>
+                <li class="nav-item dropdown" *ngIf="isAdmin | async">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        User
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#" [routerLink]="['/user/add']">Add</a></li>
+                        <li><a class="dropdown-item" href="#" [routerLink]="['/user/manage']">Manage</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="btn-group">
+                <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" data-bs-placement="left"
+                    aria-expanded="false">
+                    <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" class="rounded-circle" height="25" alt=""
+                        loading="lazy" />
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#"  [routerLink]="['/profile/manage']">Profile</a></li>
+                    <li><a class="dropdown-item" href="#" (click)="onLogout($event)">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</nav>

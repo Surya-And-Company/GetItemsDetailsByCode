@@ -15,10 +15,10 @@ export class AuthService {
   timeoutInterval: any;
   constructor(private http: HttpClient, private store: Store<AppState>) {}
 
-  login(email: string, password: string): Observable<AuthResponse> {
+  login(mobileNo: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(
       `${environment.serviceUrlv1}Authentication/Login`,
-      { email, password }
+      { mobileNo, password }
     );
   }
 
@@ -27,7 +27,8 @@ export class AuthService {
       data.token,
       data.name,
       data.profileImagePath,
-      data.expiratioDate
+      data.expireDate,
+      data.role
     );
     return user;
   }
@@ -40,7 +41,7 @@ export class AuthService {
 
   runTimeoutInterval(user: User) {
     const todaysDate = new Date().getTime();
-    const expirationDate = user.expireDate.getTime();
+    const expirationDate = new Date( user.expirationDate).getTime();
     const timeInterval = expirationDate - todaysDate;
 
     this.timeoutInterval = setTimeout(() => {
@@ -58,7 +59,8 @@ export class AuthService {
         userData.email,
         userData.token,
         userData.localId,
-        expirationDate
+        expirationDate,
+        userData.role
       );
       this.runTimeoutInterval(user);
       return user;
@@ -67,6 +69,7 @@ export class AuthService {
   }
 
   logout() {
+    debugger;
     localStorage.removeItem('userData');
     if (this.timeoutInterval) {
       clearTimeout(this.timeoutInterval);
