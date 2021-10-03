@@ -21,3 +21,7 @@ export const getUser = createSelector(getAuthState, (state) => {
 export const isAdmin = createSelector(getAuthState, (state) => {
   return state.user?.userRole === Role.Admin ? true : false;
 });
+
+export const getRole = createSelector(getAuthState, (state) => {
+  return state.user?.userRole;
+});

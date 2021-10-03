@@ -69,7 +69,6 @@ export class AuthService {
   }
 
   logout() {
-    debugger;
     localStorage.removeItem('userData');
     if (this.timeoutInterval) {
       clearTimeout(this.timeoutInterval);

@@ -47,7 +47,7 @@ namespace ItemsArchiveService.Controllers
 
             (string token, DateTime expireDate) = _jwtUtils.GenerateJwtToken(user);
 
-            return Ok(new LoginResponseDTO() { Name = user.Name, Token = token, ExpireDate = expireDate,  ProfileImage = user.ProfileImage });
+            return Ok(new LoginResponseDTO() { Name = user.Name, Token = token, ExpireDate = expireDate,  ProfileImage = user.ProfileImage, Role = user.Role });
 
         }
     }
