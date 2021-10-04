@@ -16,30 +16,18 @@ namespace ItemsArchiveService.Repository
 
         private readonly IDbContext _context;
         private  readonly IFileRepository _fileRepository;
-        private readonly IConfiguration _configuration;
         private readonly IMapper   _mapper;
         public ItemRepository(IDbContext context,IFileRepository fileRepository, IMapper mapper, IConfiguration configuration)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _fileRepository = fileRepository ?? throw new ArgumentNullException(nameof(fileRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            
         }
         public async Task AddItem(ItemDTO item)
         {
             var _item = _mapper.Map<Item>(item);
-            if (item.Images != null)
-            {
-                var time = DateTime.Now.ToString();
-                var path = Path.Combine(_configuration.GetValue<string>($"ResizeImage:ItemImage:FilePath"), time);
-                await _fileRepository.UploadFileAsync(item.Images, path);
-
-                foreach (var image in item.Images)
-                {
-                    _item.ImagePath.Add(Path.Combine(time, image.FileName));
-                }
-                await _context.Items.InsertOneAsync(_item);
-            }
+            await _context.Items.InsertOneAsync(_item);
         }
 
         public async Task ApproveItems(IEnumerable<ApproveItemDTO> items)

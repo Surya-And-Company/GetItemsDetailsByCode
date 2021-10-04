@@ -7,7 +7,9 @@ using ItemsArchiveService.Model;
 namespace ItemsArchiveService.Repository
 {
     public interface IItemRepository
-    {
+    {        
+
+        
         Task AddItem(ItemDTO item);
 
         Task<Item> GetItem(string Code);

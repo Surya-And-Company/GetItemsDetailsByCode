@@ -28,7 +28,6 @@ export class AuthGuard implements CanActivate, CanActivateChild  {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-      debugger;
     const allowedUserRoles = this.getRoutePermissions(childRoute);
     return this.store.select(getRole).pipe(
       map((role) => {
@@ -48,7 +47,6 @@ export class AuthGuard implements CanActivate, CanActivateChild  {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-      debugger;
     return this.store.select(isAuthenticated).pipe(
       map((authenticate) => {
         if (!authenticate) {

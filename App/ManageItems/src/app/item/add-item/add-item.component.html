@@ -1,32 +1,55 @@
-<div class="mt-3 mb-3 col-md-6 col-sm-8 offset-md-3 offset-sm-2">
+<div class="mt-3 mb-3 col-md-4 col-sm-10 offset-md-4 offset-sm-1"  [formGroup]="itemForm">
     <h3>Add Item</h3>
     <div class="form-group mt-2">
         <label for="code">Code</label>
-        <input type="text" class="form-control" id="code" placeholder="Enter code">
+        <input type="text" class="form-control" id="code" placeholder="Enter code" formControlName="code">
+        <div *ngIf="f.code.errors && submitAttempt">
+            <div *ngIf="f.code.errors.required" class='alert alert-danger'>Code
+                required</div>         
+        </div>
     </div>
-    <div class="form-group">
+    <div class="form-group  mt-1">
         <label for="pname">Product Name</label>
-        <input type="text" class="form-control" id="pname" placeholder="Enter product name">
+        <input type="text" class="form-control" id="pname" 
+        placeholder="Enter product name" formControlName="name">
+        <div *ngIf="f.name.errors && submitAttempt">
+            <div *ngIf="f.name.errors.required" class='alert alert-danger'>Product name
+                required</div>         
+        </div>
     </div>
-    <div class="form-group">
+    <div class="form-group mt-1">
         <label for="brand">Brand</label>
-        <input type="text" class="form-control" id="brand" placeholder="Enter brand">
-    </div>
-    <div class="form-group">
+        <input type="text" class="form-control" id="brand" placeholder="Enter brand" formControlName="brand">
+        <div *ngIf="f.brand.errors && submitAttempt">
+            <div *ngIf="f.brand.errors.required" class='alert alert-danger'>Brand
+                required</div>         
+        </div>
+    </div>   
+    <div class="form-group mt-1">
         <label for="price">Price</label>
-        <input type="text" class="form-control" id="price" placeholder="Enter price">
+        <input type="text" class="form-control" id="price" placeholder="Enter price" formControlName="sellingPrice">
+        <div *ngIf="f.sellingPrice.errors && submitAttempt">
+            <div *ngIf="f.sellingPrice.errors.required" class='alert alert-danger'>Selling price
+                required</div>         
+        </div>
     </div>
-    <div class="form-group">
+    <div class="form-group mt-1">
         <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" id="description" rows="3" placeholder="Enter description"></textarea>
+        <textarea class="form-control" id="description" rows="3" placeholder="Enter description" formControlName="description"></textarea>
+        <div *ngIf="f.description.errors && submitAttempt">
+            <div *ngIf="f.description.errors.required" class='alert alert-danger'>Description 
+                required</div>         
+        </div>
     </div>
-    <div class="form-group">
+    <div class="form-group mt-1">
         <label for="formFileMultiple" class="form-label">Upload Files(Allow multiple files)</label>
-        <input class="form-control" type="file" id="formFileMultiple" multiple />
+        <input class="form-control" type="file" id="formFileMultiple"  accept="image/png, image/gif, image/jpeg" 
+        multiple formControlName="images"   (change)="selectFiles($event)"/>
+        <div *ngIf="f.images.errors && submitAttempt">
+            <div *ngIf="f.images.errors.required" class='alert alert-danger'>Image required</div>         
+        </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-        <button type="button" class="btn btn-secondary btn-lg mt-3 text-center">Submit</button>
+        <button type="button" class="btn btn-secondary btn-lg mt-3 text-center" (click)="onSubmit()" >Submit</button>
     </div>
-
-
 </div>

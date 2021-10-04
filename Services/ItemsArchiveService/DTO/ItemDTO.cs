@@ -21,6 +21,6 @@ namespace ItemsArchiveService.DTO
         public string Description { get; set; }
 
         [Required]
-        public List<IFormFile> Images { get; set; }
+        public List<string> ImagePath { get; set; }
     }
 }

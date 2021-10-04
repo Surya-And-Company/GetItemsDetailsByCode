@@ -40,7 +40,7 @@ export class AuthEffects {
           }),
           catchError((errResp) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));
-            const errorMessage = errResp.error.error.message;
+            const errorMessage = errResp.message;
             return of(setErrorMessage({ message: errorMessage }));
           })
         );

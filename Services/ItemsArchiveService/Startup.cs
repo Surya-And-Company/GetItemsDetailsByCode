@@ -41,12 +41,14 @@ namespace ItemsArchiveService
             services.AddSingleton<IDbContext,DbContext>();
             services.AddScoped<ILog, LogNLog>();
             services.AddScoped<IJwtUtils, JwtUtils>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IThirdPartyRepository, ThirdPartyRepository>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IFileRepository, FileRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILogRepository,LogRepository>();
-            services.AddHostedService<ConfigureIndexes>();            
-             
+            services.AddHostedService<ConfigureIndexes>();   
+           
             #region 
             services.AddSwaggerGen(c =>
             {
