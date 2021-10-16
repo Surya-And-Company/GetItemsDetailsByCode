@@ -16,6 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store/app.state';
 import { JwtInterceptor } from './helper/jwt.interceptor';
+import { TooltipModule  } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { JwtInterceptor } from './helper/jwt.interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    TooltipModule.forRoot(),
     EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({

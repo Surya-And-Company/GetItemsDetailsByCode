@@ -16,12 +16,14 @@ export const reducer = createReducer(
     return {
       ...state,
       errorMessage: action.message,
+      successMessage: ''
     };
   }),
   on(setSucccessMessage, (state, action) => {
     return {
       ...state,
-      errorMessage: action.message,
+      successMessage: action.message,
+      errorMessage: ''
     };
   })
 );

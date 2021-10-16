@@ -10,13 +10,15 @@ namespace ItemsArchiveService.Repository
     {        
 
         
-        Task AddItem(ItemDTO item);
+        Task AddItem(ItemDTO item , string userId);
 
-        Task<Item> GetItem(string Code);
+        Task<List<GetItemByCodeResponseDTO>> GetItemsByCode(string Code);
 
         Task<(IEnumerable<Item>, long)> GetItems(DateTime? date, bool? status, int pageSize, int page);
 
-        Task ApproveItems(IEnumerable<ApproveItemDTO> items);
+        Task ApproveAndDisapproveItem(string id);
 
+        Task DeleteAndUndeleteImage(string id, string path);
+        
     }
 }

@@ -87,7 +87,7 @@ namespace ItemsArchiveService
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ItemsArchiveService v1"));
             }
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
 
               app.UseCors(x => x

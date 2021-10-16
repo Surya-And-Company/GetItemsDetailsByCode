@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AddItemComponent } from './add-item/add-item.component';
 import { ManageItemComponent } from './manage-item/manage-item.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from '../shared/directives/directives.module';
-import { EffectsModule } from '@ngrx/effects';
-import { ItemEffects } from './state/item.effects';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TooltipModule  } from 'ngx-bootstrap/tooltip';
 
 const routes: Routes = [
   {
@@ -26,8 +25,10 @@ const routes: Routes = [
   imports: [
     ReactiveFormsModule,
     CommonModule,
+    TooltipModule,
+    DirectivesModule,
+    PaginationModule,
     RouterModule.forChild(routes),
-    EffectsModule.forFeature([ItemEffects]),
   ]
 })
 export class ItemModule { }

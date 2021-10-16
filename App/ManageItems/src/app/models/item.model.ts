@@ -4,5 +4,5 @@ export interface Item {
     name: string;
     sellingPrice: number;
     description: string;
-    imagePath: any[]
+    imagePath: any[],
 }

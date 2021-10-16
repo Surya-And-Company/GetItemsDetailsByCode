@@ -2,7 +2,7 @@
     <h3>Add Item</h3>
     <div class="form-group mt-2">
         <label for="code">Code</label>
-        <input type="text" class="form-control" id="code" placeholder="Enter code" formControlName="code">
+        <input appOnlyNumber type="text" class="form-control" id="code" placeholder="Enter code" formControlName="code">
         <div *ngIf="f.code.errors && submitAttempt">
             <div *ngIf="f.code.errors.required" class='alert alert-danger'>Code
                 required</div>         
@@ -10,7 +10,7 @@
     </div>
     <div class="form-group  mt-1">
         <label for="pname">Product Name</label>
-        <input type="text" class="form-control" id="pname" 
+        <input appBeginingEndNoSpace type="text" class="form-control" id="pname"  maxlength="70"
         placeholder="Enter product name" formControlName="name">
         <div *ngIf="f.name.errors && submitAttempt">
             <div *ngIf="f.name.errors.required" class='alert alert-danger'>Product name
@@ -19,7 +19,7 @@
     </div>
     <div class="form-group mt-1">
         <label for="brand">Brand</label>
-        <input type="text" class="form-control" id="brand" placeholder="Enter brand" formControlName="brand">
+        <input appBeginingEndNoSpace type="text" class="form-control" id="brand" placeholder="Enter brand"  maxlength="70" formControlName="brand">
         <div *ngIf="f.brand.errors && submitAttempt">
             <div *ngIf="f.brand.errors.required" class='alert alert-danger'>Brand
                 required</div>         
@@ -27,7 +27,7 @@
     </div>   
     <div class="form-group mt-1">
         <label for="price">Price</label>
-        <input type="text" class="form-control" id="price" placeholder="Enter price" formControlName="sellingPrice">
+        <input appOnlyDecimal type="text" class="form-control" id="price" placeholder="Enter price" formControlName="sellingPrice">
         <div *ngIf="f.sellingPrice.errors && submitAttempt">
             <div *ngIf="f.sellingPrice.errors.required" class='alert alert-danger'>Selling price
                 required</div>         
@@ -35,7 +35,7 @@
     </div>
     <div class="form-group mt-1">
         <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" id="description" rows="3" placeholder="Enter description" formControlName="description"></textarea>
+        <textarea appBeginingEndNoSpace maxlength="250" class="form-control" id="description" rows="3" placeholder="Enter description" formControlName="description"></textarea>
         <div *ngIf="f.description.errors && submitAttempt">
             <div *ngIf="f.description.errors.required" class='alert alert-danger'>Description 
                 required</div>         

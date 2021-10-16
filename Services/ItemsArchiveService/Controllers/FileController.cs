@@ -8,6 +8,7 @@ using ItemsArchiveService.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
 
 namespace ItemsArchiveService.Controllers
 {
@@ -16,12 +17,12 @@ namespace ItemsArchiveService.Controllers
     public class FileController : ControllerBase
     {
         private readonly IFileRepository _fileRepository;
-        private readonly IConfiguration _configuration;
+        private readonly string _wwwPath;
 
         public FileController(IFileRepository fileRepository, IConfiguration configuration)
         {
             _fileRepository = fileRepository ?? throw new ArgumentNullException(nameof(fileRepository));
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+             _wwwPath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")).Root;
         }
         [HttpPost]
         [Authorize]
@@ -30,7 +31,7 @@ namespace ItemsArchiveService.Controllers
         {
             var paths = new List<string>();
             var time = DateTime.Now.ToString().Replace('-','_').Replace(':','_');
-            var path = Path.Combine(_configuration.GetValue<string>($"ResizeImage:ItemImage:FilePath"), time);
+            var path = Path.Combine(_wwwPath,"images", time);
             await _fileRepository.UploadFileAsync(files, path);
 
             foreach (var image in files)

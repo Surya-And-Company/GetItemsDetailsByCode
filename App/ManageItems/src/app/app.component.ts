@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { autoLogin } from './auth/state/auth.actions';
 import { isAuthenticated } from './auth/state/auth.selectors';
 import { AppState } from './store/app.state';
+import { setErrorMessage, setSucccessMessage } from './store/shared/shared.actions';
 import {
   getErrorMessage,
   getLoading,
@@ -30,4 +31,10 @@ export class AppComponent {
     this.isAuthenticated = this.store.select(isAuthenticated);
     this.store.dispatch(autoLogin());
   }
+
+   onClear(){
+    this.store.dispatch(setSucccessMessage({ message: '' }));
+    this.store.dispatch(setErrorMessage({ message:''}));
+   }
+
 }

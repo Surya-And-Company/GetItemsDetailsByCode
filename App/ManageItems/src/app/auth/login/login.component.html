@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-control-label text-muted">Password</label>
-                            <input type="password" id="psw" name="psw" placeholder="Password" class="form-control" formControlName="password">
+                            <input  appBeginingEndNoSpace type="password" id="psw" name="psw" placeholder="Password" class="form-control" formControlName="password">
                             <div *ngIf="f.password.errors && submitAttempt">
                                 <div *ngIf="f.password.errors.required" class='alert alert-danger border50'>Password is required
                                 </div>

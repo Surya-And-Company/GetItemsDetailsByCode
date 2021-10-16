@@ -8,6 +8,10 @@ namespace ItemsArchiveService.Model
     public class Item
     {
         [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("_id")]
+        public string Id {get;set;}
+
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("u_id")]
         public string UserId {get;set;}
         
@@ -27,7 +31,7 @@ namespace ItemsArchiveService.Model
         public string Description { get; set; }
 
         [BsonElement("img")]
-        public List<string> ImagePath { get; set; }
+        public List<ItemImage> ItemImages { get; set; }
 
         [BsonElement("isapproved")]
         public bool IsApproved { get; set; }

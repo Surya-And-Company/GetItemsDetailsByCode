@@ -6,11 +6,12 @@ using ItemsArchiveService.Authorization;
 using ItemsArchiveService.DTO;
 using ItemsArchiveService.Model;
 using ItemsArchiveService.Repository;
+using ItemsArchiveService.Utility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ItemsArchiveService.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("v1/api/[controller]/[action]")]
     public class ItemController : ControllerBase
@@ -30,23 +31,25 @@ namespace ItemsArchiveService.Controllers
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> AddItem(ItemDTO item)
         {
-            await _itemRepository.AddItem(item);
+
+            var user = (User)HttpContext.Items["User"];
+            await _itemRepository.AddItem(item, user.Id);
             return Ok();
         }
 
         [Authorize]
-        [HttpGet("{logdate}/{pageSize}/{page}")]
-        [ProducesResponseType(typeof(IEnumerable<Log>), (int)HttpStatusCode.OK)]
+        [HttpPost]
+        [ProducesResponseType(typeof((IEnumerable<Item> items, long totalRecord)), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(long), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetItems(DateTime? date, bool? status, int pageSize, int page)
+        public async Task<IActionResult> GetItems(GetItemsDTO getItemDto)
         {
-            (IEnumerable<Item> items, long totalRecord) result = await _itemRepository.GetItems(date, status, pageSize, page);
-            return Ok(new { logs = result.items, totalRecord = result.totalRecord });
+            (IEnumerable<Item> items, long totalRecord) result = await _itemRepository.GetItems(getItemDto.Date, getItemDto.Status, getItemDto.PageSize, getItemDto.Page);
+            return Ok(new { items = result.items, totalRecord = result.totalRecord });
         }
 
         [HttpGet("{code}")]
-        [ProducesResponseType(typeof(Item), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetItem(string code)
+        [ProducesResponseType(typeof(List<GetItemByCodeResponseDTO>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetItemsByCode(string code)
         {
             if (Request.Headers.TryGetValue("token", out var token))
             {
@@ -55,10 +58,29 @@ namespace ItemsArchiveService.Controllers
                 {
                     return Unauthorized();
                 }
-                var item = await _itemRepository.GetItem(code);
-                return Ok(item);
+                var items = await _itemRepository.GetItemsByCode(code);
+                return Ok(items);
             }
             return Unauthorized();
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteAndUndeleteImage(DeleteUndeleteImageDTO dto)
+        {
+            await _itemRepository.DeleteAndUndeleteImage(dto.ItemId, dto.Path);
+            return Ok();
+        }
+
+        [Authorize(Role.Admin)]
+        [HttpPost]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> ApproveAndDisapproveItem([FromRoute]string id)
+        {
+            await _itemRepository.ApproveAndDisapproveItem(id);
+            return Ok();
         }
     }
 }
