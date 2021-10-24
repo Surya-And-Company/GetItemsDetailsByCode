@@ -8,3 +8,6 @@ img.img-thumbnail {
 button.btn.btn-light{
     width: 100%;
 }
+.mt-6 {
+    margin-top: 4rem !important
+}
