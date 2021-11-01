@@ -1,3 +1,4 @@
+using System.IO;
 using System.Text.Json.Serialization;
 using ItemsArchiveService.Authorization;
 using ItemsArchiveService.Data;
@@ -7,6 +8,7 @@ using ItemsArchiveService.Repository;
 using ItemsArchiveService.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,8 +39,8 @@ namespace ItemsArchiveService
             services.AddAutoMapper(typeof(Startup));
             // configure strongly typed settings object
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-            
-            services.AddSingleton<IDbContext,DbContext>();
+
+            services.AddSingleton<IDbContext, DbContext>();
             services.AddScoped<ILog, LogNLog>();
             services.AddScoped<IJwtUtils, JwtUtils>();
             services.AddScoped<IItemRepository, ItemRepository>();
@@ -46,9 +48,9 @@ namespace ItemsArchiveService
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IFileRepository, FileRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ILogRepository,LogRepository>();
-            services.AddHostedService<ConfigureIndexes>();   
-           
+            services.AddScoped<ILogRepository, LogRepository>();
+            services.AddHostedService<ConfigureIndexes>();
+
             #region 
             services.AddSwaggerGen(c =>
             {
@@ -75,6 +77,12 @@ namespace ItemsArchiveService
                     });
             });
             #endregion
+            //var path = Path.Combine(System.IO.Directory.GetCurrent‌​Directory(), "..\\..\\App\\ManageItems\\dist");
+            // In production, the Angular files will be served from this directory
+            // services.AddSpaStaticFiles(configuration =>
+            // {
+            //     configuration.RootPath = path;
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,13 +95,16 @@ namespace ItemsArchiveService
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ItemsArchiveService v1"));
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
+            //app.UseSpaStaticFiles();
+
             app.UseRouting();
 
-              app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            app.UseCors(x => x
+              .AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader());
 
 
             app.ConfigureExceptionHandler(logger);
@@ -108,6 +119,16 @@ namespace ItemsArchiveService
             {
                 endpoints.MapControllers();
             });
+            // var path = Path.Combine(System.IO.Directory.GetCurrent‌​Directory(), "..\\..\\App\\ManageItems");
+
+            // app.UseSpa(spa =>
+            // {
+            //     spa.Options.SourcePath = "/../../App/ManageItems";
+            //     //if (env.IsDevelopment())
+            //     //{
+            //     spa.UseAngularCliServer(npmScript: "start");
+            //     //}
+            // });
         }
     }
 }

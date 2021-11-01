@@ -19,7 +19,7 @@ namespace ItemsArchiveService.Controllers
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
-       
+
         [Authorize(Role.Admin)]
         [HttpGet]
         [Route("{id}")]

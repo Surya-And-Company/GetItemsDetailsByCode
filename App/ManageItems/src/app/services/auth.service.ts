@@ -54,7 +54,7 @@ export class AuthService {
     const userDataString = localStorage.getItem('userData');
     if (userDataString) {
       const userData = JSON.parse(userDataString);
-      const expirationDate = new Date(userData.expirationDate);
+      const expirationDate = new Date(userData.expireDate);
       const user = new User(
         userData.email,
         userData.token,

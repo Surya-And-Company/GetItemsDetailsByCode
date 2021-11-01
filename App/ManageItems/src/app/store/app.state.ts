@@ -14,6 +14,6 @@ export interface AppState {
 export const appReducer = {
     [SHARED_STATE_NAME]: SharedReducer,
     [AUTH_STATE_NAME]: AuthReducer,
-    router: routerReducer,
+    router: routerReducer
   };
   
