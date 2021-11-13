@@ -25,11 +25,13 @@ export class AppComponent {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
+    debugger;
+    this.store.dispatch(autoLogin());
     this.showLoading = this.store.select(getLoading);
     this.errorMessage = this.store.select(getErrorMessage);
     this.successMessage = this.store.select(getSuccessMessage);
     this.isAuthenticated = this.store.select(isAuthenticated);
-    this.store.dispatch(autoLogin());
+    
   }
 
    onClear(){

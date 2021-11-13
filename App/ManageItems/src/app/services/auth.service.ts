@@ -56,10 +56,10 @@ export class AuthService {
       const userData = JSON.parse(userDataString);
       const expirationDate = new Date(userData.expirationDate);
       const user = new User(
-        userData.email,
         userData.token,
-        userData.localId,
-        expirationDate,
+        userData.name,
+        "",
+        userData.expireDate,
         userData.role
       );
       this.runTimeoutInterval(user);
