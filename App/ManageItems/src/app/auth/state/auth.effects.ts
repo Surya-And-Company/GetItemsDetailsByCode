@@ -64,7 +64,6 @@ export class AuthEffects {
   );
 
   autoLogin$ = createEffect(() => {
-    debugger;
     return this.actions$.pipe(
       ofType(autoLogin),
       mergeMap((action) => {

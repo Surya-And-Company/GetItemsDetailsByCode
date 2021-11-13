@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/state/auth.effects';
 import { environment } from 'src/environments/environment';
@@ -40,6 +40,7 @@ import { TooltipModule  } from 'ngx-bootstrap/tooltip';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {provide : LocationStrategy , useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
