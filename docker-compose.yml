@@ -1,0 +1,55 @@
+version: '3.5'
+
+services:
+    ietmdb:
+        image: mongo
+        container_name: ietmdb
+        restart: always
+        ports: 
+            - "27030:27017"
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=hdhdn8kjd82
+            - MONGO_INITDB_ROOT_PASSWORD=hdhdnykjd8282jhfd
+        volumes: 
+            - mongo_data_item:/data/db
+
+    portainer:
+        image: portainer/portainer-ce
+        restart: always
+        container_name: portainer
+        ports:
+            - "9001:9000"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer_data:/data
+
+    itemservice:
+        image: ${DOCKER_REGISTRY-}itemservice
+        container_name: itemservice
+        build:
+            context: .
+            dockerfile: Services/ItemsArchiveService/Dockerfile
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Development
+            - DatabaseSettings:ConnectionString=mongodb://hdhdn8kjd82:hdhdnykjd8282jhfd@ietmdb:27017
+            - AppSettings:Secret=hjhashdsa@adh121_1_sedfdfjdjfnj@3982kSi  
+        depends_on: 
+            - ietmdb
+        ports: 
+            - "8021:80"
+    
+    itemmanageapp:
+        image: ${DOCKER_REGISTRY-}itemmanageapp
+        container_name: itemmanageapp
+        build:
+            context: .
+            dockerfile: App/ManageItems/Dockerfile  
+        depends_on: 
+            - itemservice
+        ports: 
+            - "8022:80"
+
+          
+volumes: 
+    mongo_data_item:
+    portainer_data:
