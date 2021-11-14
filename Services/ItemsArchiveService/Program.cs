@@ -15,6 +15,8 @@ namespace ItemsArchiveService
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseDefaultServiceProvider(options =>
+                               options.ValidateScopes = false);
                 });
     }
 }

@@ -61,7 +61,8 @@ namespace ItemsArchiveService.Repository
         }
         public async Task<List<GetItemByCodeResponseDTO>> GetItemsByCode(string code)
         {
-            var projectOptions = new BsonDocument { { "code" , 1 },
+            var projectOptions = new BsonDocument {
+                                                    { "code" , 1 },
                                                      { "brand", 1 },
                                                      { "name", 1 },
                                                      { "s_price", 1 },
@@ -91,7 +92,9 @@ namespace ItemsArchiveService.Repository
 
                     foreach (var doc in cursor.Current)
                     {
-                        items.Add(BsonSerializer.Deserialize<GetItemByCodeResponseDTO>(doc));
+                        var item = BsonSerializer.Deserialize<GetItemByCodeResponseDTO>(doc);
+                        item.Id = null;
+                        items.Add(item);
                     }
                 }
             }

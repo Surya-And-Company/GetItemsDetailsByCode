@@ -38,16 +38,16 @@ services:
         ports: 
             - "8021:80"
     
-    itemmanageapp:
-        image: ${DOCKER_REGISTRY-}itemmanageapp
-        container_name: itemmanageapp
-        build:
-            context: .
-            dockerfile: App/ManageItems/Dockerfile  
-        depends_on: 
-            - itemservice
-        ports: 
-            - "8022:80"
+    # itemmanageapp:
+    #     image: ${DOCKER_REGISTRY-}itemmanageapp
+    #     container_name: itemmanageapp
+    #     build:
+    #         context: .
+    #         dockerfile: App/ManageItems/Dockerfile  
+    #     depends_on: 
+    #         - itemservice
+    #     ports: 
+    #         - "8022:80"
 
           
 volumes: 

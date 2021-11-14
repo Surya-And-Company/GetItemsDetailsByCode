@@ -1,6 +1,6 @@
 FROM node:14-alpine as node
 WORKDIR /GetItemsDetailsByCode
-COPY ["App/ManageItems/", "App/ManageItems/"]
+COPY ["App/ManageItems/" , "App/ManageItems/"]
 
 COPY . .
 WORKDIR "/GetItemsDetailsByCode/App/ManageItems"

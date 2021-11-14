@@ -1,12 +1,19 @@
+using System.Net;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ItemsArchiveService.Model;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace ItemsArchiveService.DTO
 {
     public class GetItemByCodeResponseDTO
     {
-            
+        
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("_id")]
+        public string Id {get;set;}
+
         [BsonElement("code")]
         public string Code { get; set; }
 

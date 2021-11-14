@@ -1,8 +1,10 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using ItemsArchiveService.Authorization;
 using ItemsArchiveService.DTO;
 using ItemsArchiveService.Repository;
+using ItemsArchiveService.Utility;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ItemsArchiveService.Controllers
@@ -18,6 +20,7 @@ namespace ItemsArchiveService.Controllers
             _thirdPartyRepository = thirdPartyRepository ?? throw new ArgumentNullException(nameof(thirdPartyRepository));
         }
 
+        [Authorize(Role.Admin)]
         [HttpPost]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         public  async Task<IActionResult> Add(ThirdPartyDTO thirdPartyDTO)
