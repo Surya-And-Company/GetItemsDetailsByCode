@@ -69,7 +69,7 @@ namespace ItemsArchiveService.Controllers
             return Ok();
         }
 
-        // [Authorize(Role.Admin)]
+        [Authorize(Role.Admin)]
         [AllowAnonymous]
         [HttpPost]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
