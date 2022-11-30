@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
     ietmdb:
-        image: mongo
+        image: ${DOCKER_REGISTRY-}mongo
         container_name: ietmdb
         restart: always
         ports: 
